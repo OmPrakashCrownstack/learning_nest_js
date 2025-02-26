@@ -32,4 +32,24 @@ describe('AuthController (e2e)', () => {
         expect(email).toEqual(newUserCredentials.email);
       });
   });
+
+  it('Sign up as a new user and then check current user', async () => {
+    const newUserCredentials = {
+      email: 'qwerty@example.com',
+      password: 'qwerty',
+    };
+
+    const createUserRes = await request(app.getHttpServer())
+      .post('/auth/signup')
+      .send(newUserCredentials)
+      .expect(201);
+
+    const cookie = createUserRes.get('Set-Cookie')!;
+    const { body } = await request(app.getHttpServer())
+      .get('/auth/me')
+      .set('Cookie', cookie)
+      .expect(200);
+
+    expect(body.email).toEqual(newUserCredentials.email);
+  });
 });

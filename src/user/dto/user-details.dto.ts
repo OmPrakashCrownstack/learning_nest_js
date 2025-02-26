@@ -6,6 +6,9 @@ class UserDetailsDto {
 
   @Expose()
   email: string;
+
+  @Expose()
+  isAdmin: boolean;
 }
 
 export default UserDetailsDto;
