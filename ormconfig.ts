@@ -1,7 +1,7 @@
 const dbConfig: any = {
   type: 'sqlite',
   synchronize: false,
-  migrations: ['migrations/*.ts'],
+  migrations: ['@migrations/*.ts'],
 };
 
 switch (process.env.NODE_ENV) {
